@@ -1,25 +1,24 @@
-name: Run Playwright Sum
+name: Run Playwright Scraper
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: [push]
 
 jobs:
-  run-playwright:
+  scrape:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run script
-      run: node sum_tables.js
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
+      - name: Run Playwright Script for 24f1001750@ds.study.iitm.ac.in
+        run: node sum_tables.js
